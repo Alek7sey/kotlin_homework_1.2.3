@@ -17,12 +17,10 @@ fun main() {
 fun calculationPrice(regular: Boolean, purchase: Int) {
     var result = 0
 
-    if (purchase <= 1_000) {
-        result = purchase
-    } else if (purchase <= 10_000) {
-        result = purchase - discount
-    } else {
-        result = (purchase * (1 - discountPerc)).roundToInt()
+    result = when(purchase) {
+        in 1..1000 -> purchase
+        in 1001..10_000 -> purchase - discount
+        else -> (purchase * (1 - discountPerc)).roundToInt()
     }
     if (regular) {
         result = (result * (1 - discountReg)).roundToInt()
